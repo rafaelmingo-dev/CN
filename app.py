@@ -1240,8 +1240,19 @@ aba_radar, aba_eventos, aba_detalhe, aba_como = st.tabs(
 # ----------------------------------------------------------------------------
 
 with aba_radar:
-    st.header("Radar CRSI — visão rápida")
+    # A Matriz Rápida é a visão principal do painel.
+    # Mantém somente 30D / 90D / 180D / Percentil 1A, conforme definido.
+    st.header("Matriz rápida — 30D / 90D / 180D / Percentil 1A")
 
+    st.dataframe(
+        estilizar_matriz(matriz),
+        use_container_width=True,
+        hide_index=True,
+        height=min(1120, 37 * (len(matriz) + 1)),
+    )
+
+    # A antiga visão rápida foi preservada, mas deixou de ocupar o destaque
+    # principal. Ela continua disponível abaixo para consulta quando necessário.
     tabela_rapida = radar[
         [
             "Ativo",
@@ -1254,19 +1265,12 @@ with aba_radar:
         ]
     ].copy()
 
-    st.dataframe(
-        estilizar_radar(tabela_rapida),
-        use_container_width=True,
-        hide_index=True,
-        height=min(1120, 37 * (len(tabela_rapida) + 1)),
-    )
-
-    with st.expander("Ver matriz rápida — 30D / 90D / 180D / Percentil 1A"):
+    with st.expander("Ver visão rápida completa do Radar CRSI"):
         st.dataframe(
-            estilizar_matriz(matriz),
+            estilizar_radar(tabela_rapida),
             use_container_width=True,
             hide_index=True,
-            height=min(1120, 37 * (len(matriz) + 1)),
+            height=min(1120, 37 * (len(tabela_rapida) + 1)),
         )
 
     with st.expander("Ver tabela técnica completa do Radar CRSI"):
