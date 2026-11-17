@@ -105,6 +105,7 @@ st.markdown(
 
 ATIVOS = [
     "VIVT3",
+    "BOVA11",
     "TUPY3",
     "ITUB4",
     "EGIE3",
@@ -144,6 +145,7 @@ ATIVOS = [
     "INBR32",
     "CSAN3",
     "MRVE3",
+    "BRL=X",
 ]
 
 RSI_PRECO = 3
